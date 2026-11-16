@@ -1,53 +1,28 @@
-import {useEffect, useState} from "react";
-import {getList} from "../../api/productsApi";
+import {useQueryClient} from "@tanstack/react-query";
 import useCustomMove from "../../hooks/useCustomMove";
-import useCustomLogin from "../../hooks/useCustomLogin";
-import FetchingModal from "../common/FetchingModal";
 import {API_SERVER_HOST} from "../../api/todoApi";
 import PageComponent from "../common/PageComponent";
 
 const host = API_SERVER_HOST;
 
-const initState = {
-  dtoList: [],
-  pageNumList: [],
-  pageRequestDTO: null,
-  prev: false,
-  next: false,
-  totalCount: 0,
-  prevPage: 0,
-  nextPage: 0,
-  totalPage: 0,
-  current: 0,
-};
+const ListComponent = ({serverData}) => {
+  const queryClient = useQueryClient();
 
-const ListComponent = () => {
-  const {page, size, refresh, moveToList, moveToRead} = useCustomMove();
+  const {page, size, moveToList, moveToRead} = useCustomMove();
 
-  const {exceptionHandle} = useCustomLogin();
+  const moveCheckPage = (pageParam) => {
+    if (pageParam.page !== page) {
+      moveToList(pageParam);
+      return;
+    }
 
-  const [serverData, setServerData] = useState(initState);
-
-  const [fetching, setFetching] = useState(false);
-
-  useEffect(() => {
-    setFetching(true);
-
-    getList({page, size})
-      .then((data) => {
-        setServerData(data);
-        setFetching(false);
-      })
-      .catch((err) => {
-        setFetching(false);
-        exceptionHandle(err);
-      });
-  }, [page, size, refresh]);
+    if (window.confirm("다시 페이지를 호출하시겠습니까?")) {
+      queryClient.invalidateQueries({queryKey: ["products/list", page, size]});
+    }
+  };
 
   return (
     <div className="border-2 border-blue-100 mt-10 mr-2 ml-2">
-      {fetching ? <FetchingModal/> : null}
-
       <div className="flex flex-wrap mx-auto p-6">
         {serverData.dtoList.map((product) => (
           <div
@@ -78,7 +53,7 @@ const ListComponent = () => {
         ))}
       </div>
 
-      <PageComponent serverData={serverData} movePage={moveToList}/>
+      <PageComponent serverData={serverData} movePage={moveCheckPage}/>
     </div>
   );
 };

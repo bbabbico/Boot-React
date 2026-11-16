@@ -1,8 +1,8 @@
-import {useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
+import useZustandMember from "../../zstore/useZustandMember";
 
 function BasicMenu() {
-  const loginState = useSelector((state) => state.loginSlice);
+  const loginState = useZustandMember((state) => state.member);
 
   return (
     <nav id="navbar" className="flex bg-blue-300">

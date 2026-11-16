@@ -1,4 +1,5 @@
 import {useRef, useState} from "react";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {postAdd} from "../../api/productsApi";
 import FetchingModal from "../common/FetchingModal";
 import ResultModal from "../common/ResultModal";
@@ -15,8 +16,12 @@ const AddComponent = () => {
   const [product, setProduct] = useState({...initState});
   const uploadRef = useRef();
 
-  const [fetching, setFetching] = useState(false);
-  const [result, setResult] = useState(null);
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: postAdd,
+    onSuccess: () => queryClient.invalidateQueries({queryKey: ["products/list"]}),
+  });
 
   const {moveToList} = useCustomMove();
 
@@ -37,27 +42,21 @@ const AddComponent = () => {
     formData.append("pdesc", product.pdesc);
     formData.append("price", product.price);
 
-    setFetching(true);
-
-    postAdd(formData).then((data) => {
-      setFetching(false);
-      setResult(data.result);
-    });
+    mutation.mutate(formData);
   };
 
   const closeModal = () => {
-    setResult(null);
     moveToList({page: 1});
   };
 
   return (
     <div className="border-2 border-sky-200 mt-10 m-2 p-4">
-      {fetching ? <FetchingModal/> : null}
+      {mutation.isPending ? <FetchingModal/> : null}
 
-      {result ? (
+      {mutation.data ? (
         <ResultModal
           title="Product Add Result"
-          content={`${result}번 등록 완료`}
+          content={`${mutation.data.result}번 등록 완료`}
           callbackFn={closeModal}
         />
       ) : null}

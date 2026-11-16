@@ -1,20 +1,17 @@
 import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {getCartItemsAsync, postChangeCartAsync} from "../slices/cartSlice";
+import useZustandCart from "../zstore/useZustandCart";
 import useCustomLogin from "./useCustomLogin";
 
 const useCustomCart = () => {
   const {loginState, isLogin} = useCustomLogin();
 
-  const cartItems = useSelector((state) => state.cartSlice);
-
-  const dispatch = useDispatch();
+  const {items, status, getItems, requestChangeCart} = useZustandCart();
 
   useEffect(() => {
     if (isLogin) {
-      dispatch(getCartItemsAsync());
+      getItems();
     }
-  }, [isLogin, dispatch]);
+  }, [isLogin, getItems]);
 
   const changeCart = (cino, pno, amount) => {
     const email = loginState.email;
@@ -22,17 +19,17 @@ const useCustomCart = () => {
     let qty = 1;
 
     if (cino) {
-      const target = cartItems.items.find((item) => item.cino === cino);
+      const target = items.find((item) => item.cino === cino);
 
       if (target) {
         qty = target.qty + amount;
       }
     }
 
-    dispatch(postChangeCartAsync(cino ? {email, cino, pno, qty} : {email, pno, qty}));
+    requestChangeCart(cino ? {email, cino, pno, qty} : {email, pno, qty});
   };
 
-  return {loginState, isLogin, cartItems, changeCart};
+  return {loginState, isLogin, cartItems: {items, status}, changeCart};
 };
 
 export default useCustomCart;

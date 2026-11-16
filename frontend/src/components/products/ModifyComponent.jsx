@@ -1,40 +1,46 @@
-import {useEffect, useRef, useState} from "react";
-import {getOne, putOne, deleteOne} from "../../api/productsApi";
+import {useRef, useState} from "react";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {putOne, deleteOne} from "../../api/productsApi";
 import FetchingModal from "../common/FetchingModal";
 import {API_SERVER_HOST} from "../../api/todoApi";
 import useCustomMove from "../../hooks/useCustomMove";
 import ResultModal from "../common/ResultModal";
 
-const initState = {
-  pno: 0,
-  pname: "",
-  pdesc: "",
-  price: 0,
-  delFlag: false,
-  uploadFileNames: [],
-};
-
 const host = API_SERVER_HOST;
 
-const ModifyComponent = ({pno}) => {
-  const [product, setProduct] = useState(initState);
+const ModifyComponent = ({product: serverProduct}) => {
+  const pno = serverProduct.pno;
+
+  const [product, setProduct] = useState({...serverProduct});
 
   const [result, setResult] = useState(null);
 
   const {moveToRead, moveToList} = useCustomMove();
 
-  const [fetching, setFetching] = useState(false);
+  const queryClient = useQueryClient();
 
   const uploadRef = useRef();
 
-  useEffect(() => {
-    setFetching(true);
+  const refreshQueries = () => {
+    queryClient.invalidateQueries({queryKey: ["product", String(pno)]});
+    queryClient.invalidateQueries({queryKey: ["products/list"]});
+  };
 
-    getOne(pno).then((data) => {
-      setProduct(data);
-      setFetching(false);
-    });
-  }, [pno]);
+  const modifyMutation = useMutation({
+    mutationFn: (formData) => putOne(pno, formData),
+    onSuccess: () => {
+      refreshQueries();
+      setResult("Modified");
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: () => deleteOne(pno),
+    onSuccess: () => {
+      refreshQueries();
+      setResult("Deleted");
+    },
+  });
 
   const handleChangeProduct = (e) => {
     setProduct({...product, [e.target.name]: e.target.value});
@@ -64,21 +70,11 @@ const ModifyComponent = ({pno}) => {
       formData.append("uploadFileNames", product.uploadFileNames[i]);
     }
 
-    setFetching(true);
-
-    putOne(pno, formData).then(() => {
-      setResult("Modified");
-      setFetching(false);
-    });
+    modifyMutation.mutate(formData);
   };
 
   const handleClickDelete = () => {
-    setFetching(true);
-
-    deleteOne(pno).then(() => {
-      setResult("Deleted");
-      setFetching(false);
-    });
+    deleteMutation.mutate();
   };
 
   const closeModal = () => {
@@ -93,7 +89,7 @@ const ModifyComponent = ({pno}) => {
 
   return (
     <div className="border-2 border-sky-200 mt-10 m-2 p-4">
-      {fetching ? <FetchingModal/> : null}
+      {modifyMutation.isPending || deleteMutation.isPending ? <FetchingModal/> : null}
 
       {result ? (
         <ResultModal

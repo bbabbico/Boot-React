@@ -1,11 +1,10 @@
-import {useDispatch, useSelector} from "react-redux";
 import {Navigate, createSearchParams, useNavigate} from "react-router-dom";
-import {loginPostAsync, logout} from "../slices/loginSlice";
+import useZustandMember from "../zstore/useZustandMember";
 
 const useCustomLogin = () => {
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const {member: loginState, login, logout} = useZustandMember();
 
   const exceptionHandle = (ex) => {
     const errorMsg = ex.response?.data?.error;
@@ -29,19 +28,11 @@ const useCustomLogin = () => {
     }
   };
 
-  const loginState = useSelector((state) => state.loginSlice);
-
   const isLogin = loginState.email ? true : false;
 
-  const doLogin = async (loginParam) => {
-    const action = await dispatch(loginPostAsync(loginParam));
+  const doLogin = (loginParam) => login(loginParam);
 
-    return action.payload;
-  };
-
-  const doLogout = () => {
-    dispatch(logout());
-  };
+  const doLogout = () => logout();
 
   const moveToPath = (path) => {
     navigate({pathname: path}, {replace: true});
