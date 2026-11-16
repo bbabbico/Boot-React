@@ -2,6 +2,7 @@ import {lazy, Suspense} from "react";
 import {createBrowserRouter} from "react-router-dom";
 import BasicLayout from "../layouts/BasicLayout";
 import todoRouter from "./todoRouter";
+import productsRouter from "./productsRouter";
 
 const Loading = () => <div>Loading....</div>;
 const Main = lazy(() => import("../pages/MainPage"));
@@ -21,6 +22,7 @@ const root = createBrowserRouter([
         element: <Suspense fallback={<Loading/>}><About/></Suspense>,
       },
       todoRouter(),
+      productsRouter(),
     ],
   },
 ]);
