@@ -3,6 +3,7 @@ import {createBrowserRouter} from "react-router-dom";
 import BasicLayout from "../layouts/BasicLayout";
 import todoRouter from "./todoRouter";
 import productsRouter from "./productsRouter";
+import memberRouter from "./memberRouter";
 
 const Loading = () => <div>Loading....</div>;
 const Main = lazy(() => import("../pages/MainPage"));
@@ -25,6 +26,7 @@ const root = createBrowserRouter([
       productsRouter(),
     ],
   },
+  memberRouter(),
 ]);
 
 export default root;

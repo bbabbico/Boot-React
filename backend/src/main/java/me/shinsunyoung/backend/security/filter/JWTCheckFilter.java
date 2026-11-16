@@ -32,7 +32,7 @@ public class JWTCheckFilter extends OncePerRequestFilter {
 
         log.info("check uri.............." + path);
 
-        if (path.startsWith("/api/member/")) {
+        if (path.startsWith("/api/member/") && !path.equals("/api/member/modify")) {
             return true;
         }
 

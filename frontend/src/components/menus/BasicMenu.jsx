@@ -1,6 +1,9 @@
+import {useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
 
 function BasicMenu() {
+  const loginState = useSelector((state) => state.loginSlice);
+
   return (
     <nav id="navbar" className="flex bg-blue-300">
       <div className="w-4/5 bg-gray-500">
@@ -11,17 +14,30 @@ function BasicMenu() {
           <li className="pr-6 text-2xl">
             <NavLink to="/about">About</NavLink>
           </li>
-          <li className="pr-6 text-2xl">
-            <NavLink to="/todo/">Todo</NavLink>
-          </li>
-          <li className="pr-6 text-2xl">
-            <NavLink to="/products/">Products</NavLink>
-          </li>
+
+          {loginState.email ? (
+            <>
+              <li className="pr-6 text-2xl">
+                <NavLink to="/todo/">Todo</NavLink>
+              </li>
+              <li className="pr-6 text-2xl">
+                <NavLink to="/products/">Products</NavLink>
+              </li>
+            </>
+          ) : null}
         </ul>
       </div>
 
       <div className="w-1/5 flex justify-end bg-orange-300 p-4 font-medium">
-        <div className="text-white text-sm m-1 rounded">Login</div>
+        {!loginState.email ? (
+          <div className="text-white text-sm m-1 rounded">
+            <NavLink to="/member/login">Login</NavLink>
+          </div>
+        ) : (
+          <div className="text-white text-sm m-1 rounded">
+            <NavLink to="/member/logout">Logout</NavLink>
+          </div>
+        )}
       </div>
     </nav>
   );
