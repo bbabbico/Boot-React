@@ -1,11 +1,14 @@
 import {useParams} from "react-router-dom";
+import ReadComponent from "../../components/todo/ReadComponent";
 
 function ReadPage() {
   const {tno} = useParams();
 
   return (
-    <div className="bg-white w-full">
-      <div className="text-4xl">Todo Read Page {tno}</div>
+    <div className="font-extrabold w-full bg-white mt-6">
+      <div className="text-2xl">Todo Read Page Component {tno}</div>
+
+      <ReadComponent tno={tno}/>
     </div>
   );
 }

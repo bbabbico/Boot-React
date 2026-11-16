@@ -1,0 +1,251 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1794801819492,
+  "projectRoot": "C:\\Users\\USER\\Desktop\\re",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "frontend": {
+      "path": "frontend",
+      "purpose": null,
+      "fileCount": 7,
+      "lastAccessed": 1794801819356,
+      "keyFiles": [
+        "index.html",
+        "package-lock.json",
+        "package.json",
+        "README.md",
+        "vite.config.js"
+      ]
+    },
+    "frontend\\node_modules": {
+      "path": "frontend\\node_modules",
+      "purpose": "Dependencies",
+      "fileCount": 1,
+      "lastAccessed": 1794801819357,
+      "keyFiles": []
+    },
+    "frontend\\public": {
+      "path": "frontend\\public",
+      "purpose": "Public files",
+      "fileCount": 2,
+      "lastAccessed": 1794801819358,
+      "keyFiles": [
+        "favicon.svg",
+        "icons.svg"
+      ]
+    },
+    "frontend\\src": {
+      "path": "frontend\\src",
+      "purpose": "Source code",
+      "fileCount": 4,
+      "lastAccessed": 1794801819358,
+      "keyFiles": [
+        "App.css",
+        "App.jsx",
+        "index.css"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "frontend/src/App.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1794801889636,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/pages/MainPage.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1794802197185,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/router/root.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1794802215377,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/resources/application.properties",
+      "accessCount": 2,
+      "lastAccessed": 1794803254330,
+      "type": "file"
+    },
+    {
+      "path": "frontend/package.json",
+      "accessCount": 1,
+      "lastAccessed": 1794801879939,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/main.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1794801884775,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/pages/AboutPage.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1794802195211,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/components/menus/BasicMenu.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1794802199185,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/layouts/BasicLayout.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1794802201277,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/pages/todo/IndexPage.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1794802203317,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/pages/todo/ListPage.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1794802205371,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/pages/todo/ReadPage.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1794802207363,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/pages/todo/AddPage.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1794802209343,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/pages/todo/ModifyPage.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1794802211346,
+      "type": "file"
+    },
+    {
+      "path": "frontend/src/router/todoRouter.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1794802213377,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/config/CustomServletConfig.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803155664,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/config/RootConfig.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803157796,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/controller/advice/CustomControllerAdvice.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803159962,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/controller/formatter/LocalDateFormatter.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803162569,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/controller/TodoController.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803165488,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/domain/Todo.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803168438,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/dto/PageRequestDTO.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803173544,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/dto/PageResponseDTO.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803177108,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/dto/TodoDTO.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803179357,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/repository/TodoRepository.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803181439,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/service/TodoService.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803183673,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/main/java/me/shinsunyoung/backend/service/TodoServiceImpl.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803185797,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/test/java/me/shinsunyoung/backend/repository/TodoRepositoryTests.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803187907,
+      "type": "file"
+    },
+    {
+      "path": "backend/src/test/java/me/shinsunyoung/backend/service/TodoServiceTests.java",
+      "accessCount": 1,
+      "lastAccessed": 1794803190034,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
